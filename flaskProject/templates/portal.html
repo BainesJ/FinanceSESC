@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Student Home Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2 class="text-center mt-4">Finance Portal</h2>
+  <form action="{{ url_for('portalController.portal_post') }}" method="post" class="mt-4" onsubmit="return validateForm()">
+    <div class="form-group">
+      <label for="reference">Reference</label>
+      <input id="reference" class="form-control" type="text" name="reference">
+      <small id="validationMessage" class="text-danger"></small>
+    </div>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+{% if message is defined %}
+<span style="display: block; margin-top: 10px; text-align: center;">{{ message }}</span>
+{% endif %}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  function validateForm() {
+    var referenceInput = document.getElementById("reference");
+    var validationMessage = document.getElementById("validationMessage");
+
+    var alphanumericRegex = /^[a-zA-Z0-9]+$/;
+    if (referenceInput.value.length !== 8 || !alphanumericRegex.test(referenceInput.value)) {
+      validationMessage.innerText = "Reference must be 8 characters long and contain only letters and numbers.";
+      return false;
+    } else {
+      validationMessage.innerText = "";
+      return true;
+    }
+  }
+</script>
+</body>
+</html>

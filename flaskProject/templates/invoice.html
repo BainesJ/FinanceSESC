@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 700px;
+            max-height: 600px;
+            top ;
+            background-color: #e9ecef;
+            border: 1px solid black;
+            border-radius: 1px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            flex-basis: 100px;
+            text-align: left;
+        }
+
+        .form-group input {
+            flex-grow: 1;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 style="text-align: center;">Invoice {{ invoice.reference }}</h2>
+    <form action="{{ url_for('portalController.invoice_post') }}" method="post">
+        <div class="form-group">
+            <label for="id">Id</label>
+            <input id="id" type="text" name="id" value="{{ invoice.id }}">
+        </div>
+        <div class="form-group">
+            <label for="fee">Fee</label>
+            <input id="fee" type="text" name="fee" value="{{ invoice.amount }}">
+        </div>
+        <div class="form-group">
+            <label for="due_date">Due Date</label>
+            <input id="due_date" type="text" name="due_date" value="{{ invoice.dueDate }}">
+        </div>
+        <div class="form-group">
+            <label for="type">Invoice Type</label>
+            <input id="type" type="text" name="type" value="{{ invoice.type }}">
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input id="status" type="text" name="status" value="{{ invoice.status }}">
+        </div>
+        <div class="form-group">
+            <label for="student_id">Student ID</label>
+            <input id="student_id" type="text" name="student_id" value="{{ invoice.studentId }}">
+        </div>
+        <input type="hidden" name="reference" value="{{ invoice.reference }}">
+        <div class="form-group">
+            <a href="{{ url_for('portalController.portal_get') }}" class="btn btn-primary">View Another Invoice</a>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Pay Invoice</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
